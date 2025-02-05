@@ -1,141 +1,205 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import exercisesData from '../exercises.json';
+import { X, ChevronRight, Target, PlayCircle, Info, Dumbbell } from 'lucide-react';
 import NavBar from '../NavBar';
-
-const Card = ({ index, title, muscle, gif_url, onSelect }) => {
+const ExerciseCard = ({ exercise, index, onSelect }) => {
   return (
     <motion.div
       layoutId={`exercise-${index}`}
-      className="group bg-white shadow-xl rounded-lg p-6 cursor-pointer flex flex-row justify-start gap-10 h-36 relative"
-      onClick={onSelect}
+      className="group bg-white hover:bg-gray-50 shadow-sm hover:shadow-xl rounded-2xl cursor-pointer 
+                 transition-all duration-300 overflow-hidden"
+      onClick={() => onSelect(exercise)}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
+    >
+      <div className="p-6 flex flex-col sm:flex-row gap-6 relative">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-transparent to-transparent" />
+        </div>
+
+        {/* Image Section */}
+        <div className="relative w-full sm:w-32 h-32 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
+          <img 
+            src={exercise.gif_url} 
+            alt={exercise.name} 
+            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" 
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+            <PlayCircle className="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+        </div>
+
+        {/* Content Section */}
+        <div className="flex flex-col justify-between flex-grow">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-300">
+              {exercise.name}
+            </h2>
+            <div className="flex items-center gap-2 mt-2">
+              <Target className="w-4 h-4 text-gray-400" />
+              <span className="text-sm text-gray-500">{exercise.muscle}</span>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2 text-sm text-indigo-600 font-medium mt-4">
+            <span>View details</span>
+            <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const ExerciseModal = ({ exercise, onClose }) => {
+  if (!exercise) return null;
+
+  return (
+    <motion.div
+      className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="flex items-center xl:h-20">
-        <img src={gif_url} alt={title} className="w-auto h-20 object-cover" />
-      </div>
-      <div className="flex flex-col items-start gap-3">
-        <h2 className="text-xl lg:text-2xl font-extrabold">{title}</h2>
-        <h3 className="text-lg font-light">{muscle}</h3>
-      </div>
+      <motion.div 
+        className="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden"
+        initial={{ scale: 0.9, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.9, y: 20 }}
+      >
+        <div className="relative">
+          {/* Close Button */}
+          <div className="absolute top-4 right-4 z-10">
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-gray-100 transition-colors duration-200"
+            >
+              <X className="w-5 h-5 text-gray-700" />
+            </button>
+          </div>
+
+          {/* Content */}
+          <div className="flex flex-col lg:flex-row">
+            {/* Image Section */}
+            <div className="w-full lg:w-1/2 bg-gray-100 p-8 flex items-center justify-center">
+              <div className="relative group">
+                <img
+                  src={exercise.gif_url}
+                  className="max-w-full max-h-[50vh] object-contain rounded-xl"
+                  alt={exercise.name}
+                />
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl" />
+              </div>
+            </div>
+
+            {/* Details Section */}
+            <div className="w-full lg:w-1/2 p-8">
+              <div className="space-y-6">
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 rounded-lg bg-indigo-50">
+                      <Target className="w-5 h-5 text-indigo-600" />
+                    </div>
+                    <h2 className="text-3xl font-bold text-gray-900">{exercise.name}</h2>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-500">
+                    <Info className="w-4 h-4" />
+                    <span>Target Muscle: {exercise.muscle}</span>
+                  </div>
+                </div>
+
+                <hr className="border-gray-200" />
+
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-gray-900">Instructions</h3>
+                  <div className="space-y-4">
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-medium">
+                        1
+                      </div>
+                      <p className="text-gray-600">{exercise.description1}</p>
+                    </div>
+                    {exercise.description2 && (
+                      <div className="flex gap-4">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-medium">
+                          2
+                        </div>
+                        <p className="text-gray-600">{exercise.description2}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
 
+const Classic = () => {
+  const location = useLocation();
+  const exercises = location.state?.exercises || [];
+  const [selectedExercise, setSelectedExercise] = useState(null);
 
-const FullScreenCard = ({ exercise, onClose }) => {
   return (
-    <motion.div
-        className="fixed inset-0 flex items-center justify-center z-50 bg-gray-800 bg-opacity-50 px-4 py-10 md:py-32"
-        initial={{ opacity: 0, y: 500 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 500 }}
-        transition={{
-          duration: 0.6,
-          ease: [0.25, 0.8, 0.5, 1], 
-        }}
-      >
-
-      <div className="bg-white w-full max-w-5xl mx-auto h-[90vh] sm:h-auto rounded-3xl shadow-2xl  overflow-auto flex flex-col items-end p-4">
-
-        <motion.button
-          onClick={onClose}
-          className="bg-black text-white px-4 py-2 rounded-full w-auto  md:w-auto flex items-end fixed"
-        >
-          X
-        </motion.button>
-        <div className='flex flex-col lg:flex-row items-center gap-10 p-5 md:p-10'>
-          <div className="w-full lg:w-1/2 flex justify-center">
-            <img
-              src={exercise.gif_url}
-              className="max-w-full max-h-[50vh] object-contain rounded-2xl"
-              alt="Exercise GIF"
-            />
-          </div>
-        
-          <motion.div className="w-full lg:w-1/2">
-            <div className="flex items-center gap-4 mb-6">
-              <img
-                src="https://pbs.twimg.com/media/Gbg0yNhaQAAGV47?format=png&name=small"
-                className="w-10 h-10"
-                alt=""
-              />
-              <motion.h2 className="text-3xl md:text-5xl font-bold">{exercise.name}</motion.h2>
-            </div>
-            
-            <motion.h3 className="text-lg md:text-xl mb-4">
-              <span className="font-medium">Target Muscle:</span> {exercise.muscle}
-            </motion.h3>
-            <hr className="border-black mb-6" />
-            
-          
-            <motion.h3 className="text-xl md:text-2xl font-semibold mb-4">Preparation</motion.h3>
-            <motion.p className="text-gray-700 text-start py-2">1. {exercise.description1}</motion.p>
-            <motion.p className="text-gray-700 text-start py-2">2. {exercise.description2}</motion.p>
-            
+    <div className="min-h-screen bg-gray-50">
+      <NavBar />
+      
+      {/* Header */}
+      <div className="py-12 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            className="flex items-center justify-center gap-3 mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <Dumbbell className="w-8 h-8 text-indigo-600" />
+            <h1 className="text-4xl sm:text-5xl font-bold text-center bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              Classic Body Part Split
+            </h1>
           </motion.div>
         </div>
       </div>
-    </motion.div>
-  );
-};
 
-
-
-
-
-
-const Classic = () => {
-  const { muscle } = useParams();
-  const [exercises, setExercises] = useState([]);
-  const [selectedIndex, setSelectedIndex] = useState(null);
-
-  useEffect(() => {
-    if (exercisesData.exercises && exercisesData.exercises[muscle]) {
-      setExercises(exercisesData.exercises[muscle]);
-    }
-  }, [muscle]);
-
-  const selectedExercise = selectedIndex !== null ? exercises[selectedIndex] : null;
-
-  return (
-    <>
-      <NavBar />
-      <div className="flex flex-col items-center justify-center bg-gradient-to-t pt-6 from-gray-700 via-gray-600 to-gray-400 bg-clip-text text-transparent font-extrabold text-5xl lg:text-7xl sm:text-6xl">
-        <h2 className="capitalize">{muscle}</h2>
-      </div>
-      <div className="container mx-auto p-10 py-10 sm:px-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {exercises.length > 0 ? (
             exercises.map((exercise, index) => (
-              <Card
+              <ExerciseCard
                 key={index}
+                exercise={exercise}
                 index={index}
-                title={exercise.name}
-                muscle={exercise.muscle}
-                gif_url={exercise.gif_url}
-                description={`${exercise.description1} ${exercise.description2 || ''}`}
-                onSelect={() => setSelectedIndex(index)}
+                onSelect={setSelectedExercise}
               />
             ))
           ) : (
-            <p className="text-center text-gray-600">No exercises found for this muscle group.</p>
+            <div className="col-span-2 flex flex-col items-center justify-center py-12">
+              <div className="p-4 rounded-full bg-gray-100">
+                <Info className="w-8 h-8 text-gray-400" />
+              </div>
+              <p className="mt-4 text-gray-600 text-lg">No exercises found.</p>
+            </div>
           )}
         </div>
       </div>
+
+      {/* Modal */}
       <AnimatePresence>
         {selectedExercise && (
-          <FullScreenCard
+          <ExerciseModal
             exercise={selectedExercise}
-            index={selectedIndex}
-            onClose={() => setSelectedIndex(null)}
+            onClose={() => setSelectedExercise(null)}
           />
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 
