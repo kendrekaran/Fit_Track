@@ -22,43 +22,61 @@ const Home = () => {
     transition: { duration: 0.6, ease: "easeOut" }
   };
 
-  const FeatureCard = ({ Icon, title, description, link }) => (
-    <motion.div
-      className='w-full max-w-[300px] sm:max-w-[360px] h-auto bg-white rounded-3xl p-6 sm:p-8 
-        shadow-lg hover:shadow-2xl
-        transition-all duration-300 transform hover:-translate-y-1 mx-2'
-      whileHover={{ scale:  1.02 }}
-    >
-      <div className="flex flex-col h-full gap-4 sm:gap-6">
-        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-50 rounded-2xl p-2 sm:p-3 flex items-center justify-center">
-          <Icon size={36} className="text-gray-800" />
-        </div>
-  
-        <div className="flex-grow">
-          <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-            
-            <h2 className='text-xl sm:text-2xl font-bold '>{title}</h2>
+  const FeatureCard = ({ image, Icon, title, description, link }) => {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="group relative w-full max-w-5xl mx-auto border bg-white  rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+      >
+        <div className="absolute inset-0  bg-gradient-to-br from-emerald-100 to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        <div className="relative flex flex-col md:ml-24  md:flex-row items-center justify-center gap- sm:gap-24 p-4 sm:p-6 lg:p-8">
+          {/* Image Container */}
+          <div className="w-full md:w-1/3 lg:w-72">
+            <div className="aspect-square relative rounded-2xl overflow-hidden ">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-100/20 to-gray-100/20 group-hover:scale-110 transition-transform duration-300" />
+              <img
+                src={image}
+                className="h-full w-full object-cover rounded-3xl object-center p-4 group-hover:scale-105 transition-transform duration-300"
+                alt={title}
+              />
+            </div>
           </div>
-          <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">{description}</p>
-        </div>
   
-          <Link 
-            to={link} 
-            className="inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition-colors duration-200 text-sm sm:text-base"
-          >
-            Get Started
-          </Link>
-       
-      </div>
-    </motion.div>
-  );
-
+          {/* Content Container */}
+          <div className="flex-1 flex flex-col gap-4 sm:gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center bg-emerald-50 rounded-2xl group-hover:bg-emerald-100 transition-colors duration-300">
+                <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{title}</h3>
+            </div>
+  
+            <p className="text-sm sm:text-base sm:pr-44 text-gray-600 leading-relaxed">
+              {description}
+            </p>
+  
+            <Link
+              to={link}
+              className="inline-flex items-center  justify-between w-full sm:w-80 px-4 sm:px-6 py-3 bg-emerald-600 text-white text-sm sm:text-base rounded-xl hover:bg-emerald-700 transition-colors duration-200 group/button"
+            >
+              <span>Get Started</span>
+              <MoveRight className="ml-2 w-4 h-4 group-hover/button:translate-x-1 transition-transform duration-200" />
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
   return (
     <div className="min-h-screen bg-gray-100">
       <NavBar />
 
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] overflow-hidden">
+      <section className="relative min-h-[90vh] overflow-hidden ">
           {/* Decorative elements */}
           <div className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-green-200/20 to-blue-200/20 rounded-full blur-3xl" />
           <div className="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-br from-purple-200/20 to-pink-200/20 rounded-full blur-3xl" />
@@ -73,7 +91,7 @@ const Home = () => {
               >
                 <div className="absolute inset-0  bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-[2rem] blur-3xl" />
                 <img
-                  src="https://i.imgur.com/NeL0K4N.png"
+                  src="Toji.svg"
                   alt="Fitness"
                   className="relative w-60 md:w-full max-w-xl pt-4 md:pt-0 mx-auto object-contain drop-shadow-2xl"
                 />
@@ -144,42 +162,54 @@ const Home = () => {
 
 
 
-      {/* Features Section */}
-      <section className="py-24 px-6 h-full sm:h-screen  sm:px-16 lg:px-32 bg-white">
-        <motion.div 
-          className="text-center mb-16"
-          {...fadeInUp}
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
-            Explore Our Features
-          </h2>
-        </motion.div>
+          {/* Features Section */}
+          <section className="py-24 px-6 min-h-screen flex flex-col items-center justify-center gap-16 sm:px-16 lg:px-32 bg-gradient-to-br from-white to-gray-50">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center space-y-4"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold">
+              <span className="bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                Explore Our
+              </span>
+              <span className="bg-gradient-to-br from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
+                {" "}Features
+              </span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Discover powerful tools and resources designed to help you achieve your fitness goals
+            </p>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 justify-items-center">
-          <FeatureCard
-            Icon={Dumbbell}
-            title="Browse Exercises"
-            description="Discover exercises tailored to all fitness levels and muscle groups. Perfect for beginners to pros."
-            link="/muscle"
-          />
-          <FeatureCard
-            Icon={List}
-            title="Workout Plans"
-            description="Choose from expertly designed workout plans to achieve your fitness goals, whether building strength or endurance."
-            link="/plans"
-          />
-          <FeatureCard
-            Icon={Utensils}
-            title="Diet Plans"
-            description="Get your personalised diet plans to complement your workout routine and achieve your fitness goals."
-            link="/diet"
-          />
-        </div>
-
-      </section>
+          <div className="grid grid-cols-1 gap-8 w-full">
+            <FeatureCard
+              image="https://i.pinimg.com/736x/55/21/9c/55219c8309c5ed369d81a4f7e30cdb84.jpg"
+              Icon={Dumbbell}
+              title="Browse Exercises"
+              description="Discover exercises tailored to all fitness levels and muscle groups. Perfect for beginners to pros. Our extensive library ensures you'll find the right exercises for your goals."
+              link="/muscle"
+            />
+            <FeatureCard
+              image="https://i.pinimg.com/474x/4c/e1/b1/4ce1b1f605f3b2aedfdd5aa8ab083b63.jpg"
+              Icon={List}
+              title="Workout Plans"
+              description="Choose from expertly designed workout plans to achieve your fitness goals. Whether you're building strength or improving endurance, we have the perfect plan for you."
+              link="/plans"
+            />
+            <FeatureCard
+              image="https://i.pinimg.com/736x/aa/d3/4e/aad34e88c7cebbbfbbeb82b614d8eee1.jpg"
+              Icon={Utensils}
+              title="Diet Plans"
+              description="Get personalized diet plans that complement your workout routine. Our nutrition guidance helps you fuel your body properly and achieve optimal results."
+              link="/diet"
+            />
+          </div>
+        </section>
 
       {/* Results Section */}
-      <section className="py-24 px-6 sm:px-16 lg:px-32">
+      <section className="py-24 px-6 sm:px-16 lg:px-32 bg-emerald-400">
         <motion.div 
           className="text-center mb-16"
           {...fadeInUp}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import NavBar from '../NavBar';
-import { Settings, User, Activity, Calendar, Award, LogOut, Edit, Camera, X, Check } from 'lucide-react';
+import { Settings, User, Activity, Calendar, Award, LogOut, Camera, X, Check } from 'lucide-react';
 
 const avatarImages = [
   'https://i.pinimg.com/474x/9f/df/46/9fdf46c6e5b2465e340ede0da9ee431b.jpg',

@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight, Target, PlayCircle, Info, Dumbbell } from 'lucide-react';
 import NavBar from '../NavBar';
+
+
 const ExerciseCard = ({ exercise, index, onSelect }) => {
   return (
     <motion.div
@@ -18,7 +20,7 @@ const ExerciseCard = ({ exercise, index, onSelect }) => {
       <div className="p-6 flex flex-col sm:flex-row gap-6 relative">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-transparent to-transparent" />
         </div>
 
         {/* Image Section */}
@@ -36,7 +38,7 @@ const ExerciseCard = ({ exercise, index, onSelect }) => {
         {/* Content Section */}
         <div className="flex flex-col justify-between flex-grow">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-300">
+            <h2 className="text-xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors duration-300">
               {exercise.name}
             </h2>
             <div className="flex items-center gap-2 mt-2">
@@ -45,7 +47,7 @@ const ExerciseCard = ({ exercise, index, onSelect }) => {
             </div>
           </div>
           
-          <div className="flex items-center gap-2 text-sm text-indigo-600 font-medium mt-4">
+          <div className="flex items-center gap-2 text-sm text-emerald-600 font-medium mt-4">
             <span>View details</span>
             <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
           </div>
@@ -101,8 +103,8 @@ const ExerciseModal = ({ exercise, onClose }) => {
               <div className="space-y-6">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 rounded-lg bg-indigo-50">
-                      <Target className="w-5 h-5 text-indigo-600" />
+                    <div className="p-2 rounded-lg bg-emerald-50">
+                      <Target className="w-5 h-5 text-emerald-600" />
                     </div>
                     <h2 className="text-3xl font-bold text-gray-900">{exercise.name}</h2>
                   </div>
@@ -118,14 +120,14 @@ const ExerciseModal = ({ exercise, onClose }) => {
                   <h3 className="text-xl font-semibold text-gray-900">Instructions</h3>
                   <div className="space-y-4">
                     <div className="flex gap-4">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-medium">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm font-medium">
                         1
                       </div>
                       <p className="text-gray-600">{exercise.description1}</p>
                     </div>
                     {exercise.description2 && (
                       <div className="flex gap-4">
-                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-medium">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm font-medium">
                           2
                         </div>
                         <p className="text-gray-600">{exercise.description2}</p>
@@ -159,7 +161,7 @@ const Classic = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <Dumbbell className="w-8 h-8 text-indigo-600" />
+            <Dumbbell className="w-8 h-8 text-emerald-600" />
             <h1 className="text-4xl sm:text-5xl font-bold text-center bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
               Classic Body Part Split
             </h1>

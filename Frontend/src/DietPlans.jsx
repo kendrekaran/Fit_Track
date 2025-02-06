@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, User, Weight, Ruler, Calendar, Target, Pocket, Book, ChevronRight } from 'lucide-react';
+import { Activity, User, Weight, Ruler, Calendar, Target, Pocket, ChevronRight } from 'lucide-react';
 import NavBar from './NavBar';
 import ReactMarkdown from "react-markdown";
-
-
 
 const DietPlans = () => {
   const [inputs, setInputs] = useState({
@@ -133,58 +131,61 @@ const DietPlans = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-emerald-100">
       <NavBar />
 
       {/* Header */}
-      <div className="py-12 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200">
-        
+      <div className="py-16 px-4 sm:px-6 lg:px-8 bg-white border-b border-emerald-100">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-center gap-3 mb-4"
+            className="flex items-center justify-center gap-3 mb-6"
           >
-            <h1 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-              Personalized Nutrition Calculator
+            <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+              Smart Nutrition Planner
             </h1>
           </motion.div>
-          <p className="mt-2 text-lg text-gray-600">Get your customized diet plan based on your goals and lifestyle</p>
+          <p className="mt-4 text-lg text-emerald-600">Transform your lifestyle with a personalized nutrition plan</p>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-12">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="p-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-16">
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-emerald-100">
+          <div className="p-8 lg:p-12">
             <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Weight Input */}
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                    <Weight className="w-4 h-4 text-black" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Form inputs with enhanced styling */}
+                <div className="space-y-3 group">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-hover:text-emerald-600 transition-colors">
+                    <Weight className="w-4 h-4 text-emerald-600" />
                     Weight (kg)
                   </label>
                   <input
                     type="number"
                     value={inputs.weight}
                     onChange={(e) => setInputs((prev) => ({ ...prev, weight: e.target.value }))}
-                    className="w-64 h-8 p-1 px-4 rounded-lg border border-gray-400 shadow-sm focus:border-black focus:ring-black transition-all duration-200"
+                    className="w-full h-12 px-4 rounded-xl border-2 border-emerald-100 shadow-sm 
+                    focus:border-emerald-600 focus:ring focus:ring-emerald-200 
+                    transition-all duration-200 hover:border-emerald-200"
                     required
                   />
                 </div>
 
-                {/* Height Input */}
-                <div className="space-y-2">
+                 {/* Height Input */}
+                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                    <Ruler className="w-4 h-4 text-black" />
+                    <Ruler className="w-4 h-4 text-emerald-600" />
                     Height (cm)
                   </label>
                   <input
                     type="number"
                     value={inputs.height}
                     onChange={(e) => setInputs((prev) => ({ ...prev, height: e.target.value }))}
-                    className="w-64 h-8 p-1 px-4 rounded-lg border shadow-sm focus:border-black focus:ring-black transition-all duration-200 border-gray-400"
+                    className="w-full h-12 px-4 rounded-xl border-2 border-emerald-100 shadow-sm 
+                    focus:border-emerald-600 focus:ring focus:ring-emerald-200 
+                    transition-all duration-200 hover:border-emerald-200"
                     required
                   />
                 </div>
@@ -192,28 +193,31 @@ const DietPlans = () => {
                 {/* Age Input */}
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                    <Calendar className="w-4 h-4 text-black" />
+                    <Calendar className="w-4 h-4 text-emerald-600" />
                     Age
                   </label>
                   <input
                     type="number"
                     value={inputs.age}
                     onChange={(e) => setInputs((prev) => ({ ...prev, age: e.target.value }))}
-                    className="w-64 h-8 p-1 px-4 rounded-lg border shadow-sm focus:border-black focus:ring-black transition-all duration-200 border-gray-400"
+                    className="w-full h-12 px-4 rounded-xl border-2 border-emerald-100 shadow-sm 
+                    focus:border-emerald-600 focus:ring focus:ring-emerald-200 
+                    transition-all duration-200 hover:border-emerald-200"
                     required
                   />
                 </div>
-
-                {/* Gender Input */}
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                    <User className="w-4 h-4 text-black" />
+                
+                <div className="space-y-3 group">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-hover:text-emerald-600 transition-colors">
+                    <User className="w-4 h-4 text-emerald-600" />
                     Gender
                   </label>
                   <select
                     value={inputs.gender}
                     onChange={(e) => setInputs((prev) => ({ ...prev, gender: e.target.value }))}
-                    className="w-64 h-8 p-1 px-4 rounded-lg border shadow-sm focus:border-black focus:ring-black transition-all duration-200 border-gray-400"
+                    className="w-full h-12 px-4 rounded-xl border-2 border-emerald-100 shadow-sm 
+                    focus:border-emerald-600 focus:ring focus:ring-emerald-200 
+                    transition-all duration-200 hover:border-emerald-200"
                     required
                   >
                     <option value="male">Male</option>
@@ -221,16 +225,18 @@ const DietPlans = () => {
                   </select>
                 </div>
 
-                {/* Activity Level Input */}
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                    <Activity className="w-4 h-4 text-black" />
+                {/* Activity Level with enhanced select */}
+                <div className="space-y-3 group">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-hover:text-emerald-600 transition-colors">
+                    <Activity className="w-4 h-4 text-emerald-600" />
                     Activity Level
                   </label>
                   <select
                     value={inputs.activityLevel}
                     onChange={(e) => setInputs((prev) => ({ ...prev, activityLevel: e.target.value }))}
-                    className="w-64 h-8 p-1 px-4 rounded-lg border shadow-sm focus:border-black focus:ring-black transition-all duration-200 border-gray-400"
+                    className="w-full h-12 px-4 rounded-xl border-2 border-emerald-100 shadow-sm 
+                    focus:border-emerald-600 focus:ring focus:ring-emerald-200 
+                    transition-all duration-200 hover:border-emerald-200"
                     required
                   >
                     <option value="sedentary">Sedentary (Little/No Exercise)</option>
@@ -244,13 +250,15 @@ const DietPlans = () => {
                 {/* Goal Input */}
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                    <Target className="w-4 h-4 text-black" />
+                    <Target className="w-4 h-4 text-emerald-600" />
                     Goal
                   </label>
                   <select
                     value={inputs.goal}
                     onChange={(e) => setInputs((prev) => ({ ...prev, goal: e.target.value }))}
-                    className="w-64 h-8 p-1 px-4 rounded-lg border shadow-sm focus:border-black focus:ring-black transition-all duration-200 border-gray-400"
+                    className="w-full h-12 px-4 rounded-xl border-2 border-emerald-100 shadow-sm 
+                    focus:border-emerald-600 focus:ring focus:ring-emerald-200 
+                    transition-all duration-200 hover:border-emerald-200"
                     required
                   >
                     <option value="lose">Lose Weight</option>
@@ -261,33 +269,33 @@ const DietPlans = () => {
               </div>
 
               {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-600">
+                <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 animate-pulse">
                   {error}
                 </div>
               )}
 
-              <div className="flex justify-center">
+              <div className="flex justify-center pt-4">
                 <button
                   type="submit"
                   disabled={loading}
                   className={`
-                    px-8 py-3 rounded-lg bg-black text-white font-medium
+                    px-12 py-4 rounded-xl bg-emerald-600 text-white font-medium
                     transform transition-all duration-200
-                    hover:bg-black hover:scale-105
-                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black
+                    hover:bg-emerald-500 hover:scale-105 hover:shadow-lg
+                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-600
                     disabled:opacity-50 disabled:cursor-not-allowed
                   `}
                 >
                   {loading ? (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                       <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      <span>Calculating...</span>
+                      <span>Calculating your plan...</span>
                     </div>
                   ) : (
-                    'Calculate Requirements'
+                    'Generate Your Plan'
                   )}
                 </button>
               </div>
@@ -300,34 +308,42 @@ const DietPlans = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="border-t border-gray-200 bg-gray-50 p-8"
+                className="border-t border-emerald-100 bg-emerald-50 p-8 lg:p-12"
               >
                 <div className="max-w-3xl mx-auto">
-                  <div className="grid grid-cols-2 gap-6 mb-8">
-                    <div className="bg-white p-6 rounded-xl shadow-sm">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Pocket className="w-5 h-5 text-black" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 hover:shadow-md transition-shadow">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 bg-emerald-100 rounded-lg">
+                          <Pocket className="w-6 h-6 text-emerald-600" />
+                        </div>
                         <h3 className="text-lg font-semibold text-gray-900">Daily Calories</h3>
                       </div>
-                      <p className="text-3xl font-bold text-black">{result.calories} kcal</p>
+                      <p className="text-4xl font-bold text-emerald-600">{result.calories} kcal</p>
                     </div>
-                    <div className="bg-white p-6 rounded-xl shadow-sm">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Target className="w-5 h-5 text-black" />
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 hover:shadow-md transition-shadow">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 bg-emerald-100 rounded-lg">
+                          <Target className="w-6 h-6 text-emerald-600" />
+                        </div>
                         <h3 className="text-lg font-semibold text-gray-900">Daily Protein</h3>
                       </div>
-                      <p className="text-3xl font-bold text-black">{result.protein_grams}g</p>
+                      <p className="text-4xl font-bold text-emerald-600">{result.protein_grams}g</p>
                     </div>
                   </div>
 
                   {result && (
-                    <div className="bg-white p-6 rounded-xl shadow-sm">
-                      <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                        Your Personalized Diet Plan
-                      </h3>
-                      <ReactMarkdown>
-                        {animatedDietPlan}
-                      </ReactMarkdown>
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100">
+                      <div className="flex items-center gap-3 mb-6">
+                        <h3 className="text-2xl font-semibold text-gray-900">
+                          Your Personalized Diet Plan
+                        </h3>
+                      </div>
+                      <div className="prose prose-emerald max-w-none">
+                        <ReactMarkdown>
+                          {animatedDietPlan}
+                        </ReactMarkdown>
+                      </div>
                     </div>
                   )}
                 </div>

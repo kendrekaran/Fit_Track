@@ -1,7 +1,77 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import NavBar from './NavBar';
-import {exercises} from './exercises.json';
+import { exercises } from './exercises.json';
+import { Calendar, Users, Dumbbell, Timer, ChevronRight, Target, Trophy } from 'lucide-react';
+
+const PlanCard = ({ plan, details, image, onClick, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: index * 0.1 }}
+    onClick={onClick}
+    className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+  >
+    <div className="aspect-w-16 aspect-h-9 relative">
+      <img
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        src={image}
+        alt={details.title}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
+      
+      <div className="absolute top-4 left-4">
+        <div className="bg-white/10 backdrop-blur-sm p-2 rounded-xl">
+          <Trophy className="w-6 h-6 text-white" />
+        </div>
+      </div>
+
+      <div className="absolute top-4 right-4">
+        <span className="bg-emerald-500/20 backdrop-blur-sm text-emerald-400 px-3 py-1 rounded-full text-sm font-medium">
+          {details.intensity} Intensity
+        </span>
+      </div>
+    </div>
+
+    <div className="relative p-6">
+      <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+        {details.title}
+      </h3>
+
+      <p className="text-gray-600 mb-6">
+        {details.description}
+      </p>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="flex items-center gap-2">
+          <Calendar className="w-5 h-5 text-emerald-500" />
+          <span className="text-sm text-gray-600">{details.days}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Timer className="w-5 h-5 text-emerald-500" />
+          <span className="text-sm text-gray-600">{details.intensity}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Users className="w-5 h-5 text-emerald-500" />
+          <span className="text-sm text-gray-600">{details.experience}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Target className="w-5 h-5 text-emerald-500" />
+          <span className="text-sm text-gray-600">Targeted Focus</span>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2 mt-6 text-emerald-500 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+        <span>View workout plan</span>
+        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+    </div>
+  </motion.div>
+);
 
 const Plans = () => {
   const location = useLocation();
@@ -11,10 +81,68 @@ const Plans = () => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Function to handle plan selection and pass exercises
+  const planImages = {
+    classic: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGd5bXxlbnwwfHwwfHx8MA%3D%3D",
+    ppl: "https://images.unsplash.com/photo-1605296867424-35fc25c9212a?w=800",
+    'upper-lower': "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=800",
+    fullbody: "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800",
+    power: "https://images.unsplash.com/photo-1591940742878-14d039c6d232?w=800",
+    endurance: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800"
+  };
+
+  const planDetails = {
+    classic: {
+      image:"https://i.pinimg.com/474x/53/ec/b5/53ecb5dae265e12b423ed8cdbdb1de03.jpg",
+      title: 'Classic Body Part Split',
+      days: '5 Days per Week',
+      description: 'Traditional bodybuilding split targeting each muscle group once per week',
+      intensity: 'High',
+      experience: 'Intermediate'
+    },
+    ppl: {
+      image:'https://i.pinimg.com/474x/81/3a/a7/813aa7255685f11be23fd13de9ac84b2.jpg',
+      title: 'Push, Pull, Legs',
+      days: '6 Days per Week',
+      description: 'Efficient split for maximum muscle growth and strength gains',
+      intensity: 'High',
+      experience: 'Advanced'
+    },
+    'upper-lower': {
+      image:'https://i.pinimg.com/474x/45/40/c1/4540c1ae44d7ec684bac54292b99bdc5.jpg',
+      title: 'Upper/Lower Split',
+      days: '4 Days per Week',
+      description: 'Balanced approach for building strength and muscle mass',
+      intensity: 'Moderate',
+      experience: 'Intermediate'
+    },
+    fullbody: {
+      image:'https://i.pinimg.com/474x/d0/ca/72/d0ca72fac05f6b51c4e888ba0c154381.jpg',
+      title: 'Full-Body Routine',
+      days: '3 Days per Week',
+      description: 'Perfect for beginners and those with limited time for exercise, this routine offers a simple yet effective way to stay active.',
+      intensity: 'Moderate',
+      experience: 'Beginner'
+    },
+    power: {
+      image:'https://i.pinimg.com/736x/b2/15/63/b21563f95b6b34fce85bc843699038f5.jpg',
+      title: 'Power & Hypertrophy Split',
+      days: '5 Days per Week',
+      description: 'Focus on building strength and increasing muscle size through a well-structured workout plan that incorporates progressive overload.',
+      intensity: 'Very High',
+      experience: 'Advanced'
+    },
+    endurance: {
+      image:'https://i.pinimg.com/474x/cb/5d/ee/cb5deee7a729b262409de28df8392fa4.jpg',
+      title: 'Endurance Training',
+      days: '4 Days per Week',
+      description: 'Improve stamina and functional fitness along with muscle tone and endurance. This plan is perfect for those looking to increase cardiovascular health.',
+      intensity: 'Moderate',
+      experience: 'All Levels'
+    }
+  };
+
   const handlePlanSelection = (plan) => {
     let selectedExercises = [];
-
     switch (plan) {
       case 'classic':
         selectedExercises = [
@@ -74,45 +202,82 @@ const Plans = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <NavBar />
 
-      <div className='flex flex-col items-center justify-center bg-gradient-to-t from-gray-700 via-gray-600 to-gray-400 bg-clip-text text-transparent font-extrabold text-4xl md:text-5xl pt-10'>
-        <h2 className='flex justify-start items-start'>Choose a Plan</h2>
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              Choose Your 
+              <span className="bg-gradient-to-br from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                {" "}
+                Training Plan
+              </span>
+            </span>
+          </h1>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Select a workout plan that matches your goals and experience level
+          </p>
+        </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 py-4 md:px-20 md:py-10">
-        {['classic', 'ppl', 'upper-lower', 'fullbody', 'power', 'endurance'].map((plan) => (
-          <div
-            key={plan}
-            onClick={() => handlePlanSelection(plan)}
-            className="relative bg-white shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto transform transition duration-500 hover:scale-105 hover:shadow-3xl cursor-pointer"
-          >
-            <img
-              className="h-40 w-64 md:w-full object-cover md:h-60 filter grayscale"
-              src={`https://i.pinimg.com/474x/e6/83/c8/e683c8e4c2f66c1a0c316c9f968b5b9c.jpg`} 
-              alt={plan}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent opacity-100 transition-opacity duration-300 rounded-lg flex flex-col items-start justify-end p-4">
-              <p className="text-white text-sm md:text-2xl font-bold">
-                {plan === 'classic' && 'Classic Body Part Split'}
-                {plan === 'ppl' && 'Push, Pull, Legs'}
-                {plan === 'upper-lower' && 'Upper/Lower Split'}
-                {plan === 'fullbody' && 'Full-Body Routine'}
-                {plan === 'power' && 'Power & Hypertrophy Split'}
-                {plan === 'endurance' && 'Endurance & Functional Training'}
-              </p>
-              <p className='text-gray-200'>
-                {plan === 'classic' && '5 Days per Week'}
-                {plan === 'ppl' && '6 Days per Week'}
-                {plan === 'upper-lower' && '4 Days per Week'}
-                {plan === 'fullbody' && '3 Days per Week'}
-                {plan === 'power' && '5 Days per Week'}
-                {plan === 'endurance' && '4 Days per Week'}
-              </p>
-            </div>
-          </div>
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {Object.keys(planDetails).map((plan, index) => (
+            <motion.div
+              key={plan}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              onClick={() => handlePlanSelection(plan)}
+              className="group relative bg-white  rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+            >
+              <div className="aspect-w-16 aspect-h-9 relative">
+                <img
+                  className="inset-0 w-96 h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  src={planDetails[plan].image}
+                  alt={planDetails[plan].title}
+                />
+                <div className="absolute inset-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+              </div>
+
+              <div className="relative p-6">
+                <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                  {planDetails[plan].title}
+                </h3>
+
+                <p className="text-gray-600 mb-4 text-sm">
+                  {planDetails[plan].description}
+                </p>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-emerald-500" />
+                    <span className="text-sm text-gray-600">{planDetails[plan].days}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Timer className="w-5 h-5 text-emerald-500" />
+                    <span className="text-sm text-gray-600">{planDetails[plan].intensity}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-emerald-500" />
+                    <span className="text-sm text-gray-600">{planDetails[plan].experience}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Dumbbell className="w-5 h-5 text-emerald-500" />
+                    <span className="text-sm text-gray-600">Strength Focus</span>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

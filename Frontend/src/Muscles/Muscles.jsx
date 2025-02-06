@@ -20,11 +20,11 @@ const Card = ({ index, title, muscle, gif_url, onSelect }) => {
       <div className="p-6 flex flex-col sm:flex-row gap-6 relative">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-transparent to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="relative w-full sm:w-32 h-32 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
+        <div className="relative w-full sm:w-32 h-60 sm:h-32 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
           <img 
             src={gif_url} 
             alt={title} 
@@ -37,7 +37,7 @@ const Card = ({ index, title, muscle, gif_url, onSelect }) => {
 
         <div className="flex flex-col justify-between flex-grow">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-300">
+            <h2 className="text-xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors duration-300">
               {title}
             </h2>
             <div className="flex items-center gap-2 mt-2">
@@ -46,7 +46,7 @@ const Card = ({ index, title, muscle, gif_url, onSelect }) => {
             </div>
           </div>
           
-          <div className="flex items-center gap-2 text-sm text-indigo-600 font-medium mt-4">
+          <div className="flex items-center gap-2 text-sm text-emerald-600 font-medium mt-4">
             <span>View details</span>
             <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
           </div>
@@ -65,7 +65,7 @@ const FullScreenCard = ({ exercise, onClose }) => {
       exit={{ opacity: 0 }}
     >
       <motion.div 
-        className="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden"
+        className="bg-white w-full max-w-5xl rounded-3xl shadow-2xl h-full sm:h-auto overflow-y-auto sm:overflow-hidden"
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
@@ -102,8 +102,8 @@ const FullScreenCard = ({ exercise, onClose }) => {
                 {/* Title */}
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 rounded-lg bg-indigo-50">
-                      <Target className="w-5 h-5 text-indigo-600" />
+                    <div className="p-2 rounded-lg bg-emerald-50">
+                      <Target className="w-5 h-5 text-emerald-600" />
                     </div>
                     <h2 className="text-3xl font-bold text-gray-900">{exercise.name}</h2>
                   </div>
@@ -120,13 +120,13 @@ const FullScreenCard = ({ exercise, onClose }) => {
                   <h3 className="text-xl font-semibold text-gray-900">Instructions</h3>
                   <div className="space-y-4">
                     <div className="flex gap-4">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-medium">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm font-medium">
                         1
                       </div>
                       <p className="text-gray-600">{exercise.description1}</p>
                     </div>
                     <div className="flex gap-4">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-medium">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm font-medium">
                         2
                       </div>
                       <p className="text-gray-600">{exercise.description2}</p>

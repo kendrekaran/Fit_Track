@@ -7,7 +7,6 @@ import Profile from './NavElments/Profile'
 import BrowseExercise from './BrowseExercise'
 import MuscleExercises from './Muscles/Muscles'
 import { useState,useEffect } from 'react'
-import Loader from './Loader'
 import Plans from './Plans'
 import Classic from './Plans/Classic'
 import PPL from './Plans/PPL'
@@ -16,22 +15,13 @@ import Fullbody from './Plans/Fullbody'
 import Power from './Plans/Power'
 import Endurance from './Plans/Endurance'
 import DietPlans from './DietPlans'
+import { LoadingProvider } from './LoadingContext'
 
 const App = () => {
-  const [loading, setLoading] = useState(false)
-  const location = useLocation
-
-  useEffect(() =>{
-    setLoading(true)
-
-    const timer = setTimeout(() => setLoading(false),800)
-
-    return () => clearTimeout(timer)
-  },[location])
 
   return (
     <div>
-      {loading&&<Loader/>}
+    <LoadingProvider>
       <Routes>
         <Route path="/" element={<Register/>} ></Route>
         <Route path="/register" element={<Register/>} ></Route>
@@ -49,7 +39,7 @@ const App = () => {
         <Route path="/plans/power" element={<Power />} />
         <Route path="/plans/endurance" element={<Endurance />} />
       </Routes>
-    
+    </LoadingProvider>
     </div>
   )
 }
