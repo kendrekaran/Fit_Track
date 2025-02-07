@@ -23,17 +23,17 @@ const Card = ({ title, description, icon: Icon }) => {
     >
 
       <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-transparent to-transparent" />
-        <div className="absolute h-32 w-32 -right-8 -bottom-8 bg-emerald-50 rounded-full" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-transparent to-transparent" />
+        <div className="absolute h-32 w-32 -right-8 -bottom-8 bg-blue-50 rounded-full" />
       </div>
 
 
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-start gap-4 mb-4">
-          <div className="p-3 rounded-xl bg-emerald-50 group-hover:bg-emerald-100 transition-colors duration-300">
-            <Icon className="w-6 h-6 text-emerald-600" />
+          <div className="p-3 rounded-xl bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300">
+            <Icon className="w-6 h-6 text-blue-600" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors duration-300">
+          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
             {title}
           </h3>
         </div>
@@ -43,7 +43,7 @@ const Card = ({ title, description, icon: Icon }) => {
         </p>
 
         <motion.div
-          className="mt-4 flex items-center gap-2 text-sm text-emerald-600 font-medium cursor-pointer"
+          className="mt-4 flex items-center gap-2 text-sm text-blue-600 font-medium cursor-pointer"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2 }}

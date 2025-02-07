@@ -28,7 +28,7 @@ const MuscleCard = ({ to, imageSrc, title, exercises, difficulty, benefits }) =>
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-6">
-        <div className="flex items-center gap-2 mb-28 ml-44 text-emerald-400 transition-transform duration-300 transform translate-y-0 opacity-0 group-hover:-translate-y-2 group-hover:opacity-100">
+        <div className="flex items-center gap-2 mb-28 ml-44 text-blue-400 transition-transform duration-300 transform translate-y-0 opacity-0 group-hover:-translate-y-2 group-hover:opacity-100">
             <span>Explore exercises</span>
             <ChevronRight className="w-5 h-5" />
         </div>
@@ -38,18 +38,18 @@ const MuscleCard = ({ to, imageSrc, title, exercises, difficulty, benefits }) =>
             <h3 className="text-white text-2xl md:text-3xl font-bold tracking-wide">
               {title}
             </h3>
-            <span className="bg-emerald-500/20 backdrop-blur-sm text-emerald-400 px-3 py-1 rounded-full text-sm font-medium">
+            <span className="bg-blue-500/20 backdrop-blur-sm text-blue-400 px-3 py-1 rounded-full text-sm font-medium">
               {exercises} exercises
             </span>
           </div>
 
           <div className="grid grid-cols-2 gap-3 text-sm">
             <div className="flex items-center gap-2 text-gray-300">
-              <Trophy className="w-4 h-4 text-emerald-400" />
+              <Trophy className="w-4 h-4 text-blue-400" />
               <span>{difficulty}</span>
             </div>
             <div className="flex items-center gap-2 text-gray-300">
-              <Target className="w-4 h-4 text-emerald-400" />
+              <Target className="w-4 h-4 text-blue-400" />
               <span>{benefits}</span>
             </div>
           </div>
@@ -140,7 +140,7 @@ const BrowseExercise = () => {
             <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
               Target Your
             </span>
-            <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
               {" "}Muscle Groups
             </span>
           </h1>

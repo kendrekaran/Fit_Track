@@ -31,13 +31,13 @@ const Home = () => {
         transition={{ duration: 0.5 }}
         className="group relative w-full max-w-5xl mx-auto border bg-white  rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
       >
-        <div className="absolute inset-0  bg-gradient-to-br from-emerald-100 to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0  bg-gradient-to-br from-sky-100 to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         <div className="relative flex flex-col md:ml-24  md:flex-row items-center justify-center gap- sm:gap-24 p-4 sm:p-6 lg:p-8">
           {/* Image Container */}
           <div className="w-full md:w-1/3 lg:w-72">
             <div className="aspect-square relative rounded-2xl overflow-hidden ">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-100/20 to-gray-100/20 group-hover:scale-110 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-100/20 to-gray-100/20 group-hover:scale-110 transition-transform duration-300" />
               <img
                 src={image}
                 className="h-full w-full object-cover rounded-3xl object-center p-4 group-hover:scale-105 transition-transform duration-300"
@@ -49,8 +49,8 @@ const Home = () => {
           {/* Content Container */}
           <div className="flex-1 flex flex-col gap-4 sm:gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center bg-emerald-50 rounded-2xl group-hover:bg-emerald-100 transition-colors duration-300">
-                <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center bg-sky-50 rounded-2xl group-hover:bg-sky-100 transition-colors duration-300">
+                <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-sky-600" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{title}</h3>
             </div>
@@ -61,7 +61,7 @@ const Home = () => {
   
             <Link
               to={link}
-              className="inline-flex items-center  justify-between w-full sm:w-80 px-4 sm:px-6 py-3 bg-emerald-600 text-white text-sm sm:text-base rounded-xl hover:bg-emerald-700 transition-colors duration-200 group/button"
+              className="inline-flex items-center  justify-between w-full sm:w-80 px-4 sm:px-6 py-3 bg-sky-600 text-white text-sm sm:text-base rounded-xl hover:bg-sky-700 transition-colors duration-200 group/button"
             >
               <span>Get Started</span>
               <MoveRight className="ml-2 w-4 h-4 group-hover/button:translate-x-1 transition-transform duration-200" />
@@ -78,7 +78,7 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] overflow-hidden ">
           {/* Decorative elements */}
-          <div className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-green-200/20 to-blue-200/20 rounded-full blur-3xl" />
+          <div className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-blue-200/20 to-blue-200/20 rounded-full blur-3xl" />
           <div className="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-br from-purple-200/20 to-pink-200/20 rounded-full blur-3xl" />
 
           <div className="relative z-10 container mx-auto px-6 sm:px-16 lg:px-32 h-full md:h-[90vh] flex items-center">
@@ -89,7 +89,7 @@ const Home = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                <div className="absolute inset-0  bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-[2rem] blur-3xl" />
+                <div className="absolute inset-0  bg-gradient-to-br from-blue-400/20 to-blue-400/20 rounded-[2rem] blur-3xl" />
                 <img
                   src="Toji.svg"
                   alt="Fitness"
@@ -118,14 +118,14 @@ const Home = () => {
                   <h1 className="text-3xl sm:text-5xl md:text-7xl text-center sm:text-start font-bold leading-tight">
                     <span className="bg-gradient-to-br from-gray-900 via-gray-700 to-gray-800 bg-clip-text text-transparent">
                       Your 
-                      <span className="bg-gradient-to-br from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-br from-blue-600 to-sky-600 bg-clip-text text-transparent">
                       {" "}
                       Personal
                     </span>
                       <br />
                       Guide To
                     </span>
-                    <span className="bg-gradient-to-br from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-br from-blue-600 to-sky-600 bg-clip-text text-transparent">
                       {" "}
                       Fitness
                     </span>
@@ -141,7 +141,7 @@ const Home = () => {
                     to="/muscle"
                     className="group inline-flex items-center justify-center gap-2 px-2 py-2 sm:px-6 sm:py-3 bg-gradient-to-br from-gray-900 to-black text-white rounded-2xl font-semibold hover:shadow-xl transform transition-all duration-300 hover:scale-[1.02] relative overflow-hidden"
                   >
-                    <span className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     Start Training
                     <MoveRight className="group-hover:translate-x-1 transition-transform duration-300" />
                   </Link>
@@ -174,7 +174,7 @@ const Home = () => {
               <span className="bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
                 Explore Our
               </span>
-              <span className="bg-gradient-to-br from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-br from-sky-600 to-sky-500 bg-clip-text text-transparent">
                 {" "}Features
               </span>
             </h2>
@@ -209,7 +209,7 @@ const Home = () => {
         </section>
 
       {/* Results Section */}
-      <section className="py-24 px-6 sm:px-16 lg:px-32 bg-emerald-400">
+      <section className="py-24 px-6 sm:px-16 lg:px-32 bg-sky-400">
         <motion.div 
           className="text-center mb-16"
           {...fadeInUp}

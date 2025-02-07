@@ -29,14 +29,14 @@ const PlanCard = ({ plan, details, image, onClick, index }) => (
       </div>
 
       <div className="absolute top-4 right-4">
-        <span className="bg-emerald-500/20 backdrop-blur-sm text-emerald-400 px-3 py-1 rounded-full text-sm font-medium">
+        <span className="bg-blue-500/20 backdrop-blur-sm text-blue-400 px-3 py-1 rounded-full text-sm font-medium">
           {details.intensity} Intensity
         </span>
       </div>
     </div>
 
     <div className="relative p-6">
-      <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+      <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
         {details.title}
       </h3>
 
@@ -46,29 +46,29 @@ const PlanCard = ({ plan, details, image, onClick, index }) => (
 
       <div className="grid grid-cols-2 gap-4">
         <div className="flex items-center gap-2">
-          <Calendar className="w-5 h-5 text-emerald-500" />
+          <Calendar className="w-5 h-5 text-blue-500" />
           <span className="text-sm text-gray-600">{details.days}</span>
         </div>
         <div className="flex items-center gap-2">
-          <Timer className="w-5 h-5 text-emerald-500" />
+          <Timer className="w-5 h-5 text-blue-500" />
           <span className="text-sm text-gray-600">{details.intensity}</span>
         </div>
         <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-emerald-500" />
+          <Users className="w-5 h-5 text-blue-500" />
           <span className="text-sm text-gray-600">{details.experience}</span>
         </div>
         <div className="flex items-center gap-2">
-          <Target className="w-5 h-5 text-emerald-500" />
+          <Target className="w-5 h-5 text-blue-500" />
           <span className="text-sm text-gray-600">Targeted Focus</span>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mt-6 text-emerald-500 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+      <div className="flex items-center gap-2 mt-6 text-blue-500 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
         <span>View workout plan</span>
         <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
     </div>
   </motion.div>
 );
@@ -81,14 +81,6 @@ const Plans = () => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const planImages = {
-    classic: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGd5bXxlbnwwfHwwfHx8MA%3D%3D",
-    ppl: "https://images.unsplash.com/photo-1605296867424-35fc25c9212a?w=800",
-    'upper-lower': "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=800",
-    fullbody: "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800",
-    power: "https://images.unsplash.com/photo-1591940742878-14d039c6d232?w=800",
-    endurance: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800"
-  };
 
   const planDetails = {
     classic: {
@@ -143,61 +135,71 @@ const Plans = () => {
 
   const handlePlanSelection = (plan) => {
     let selectedExercises = [];
+  
     switch (plan) {
       case 'classic':
-        selectedExercises = [
-          ...exercises.chest.slice(0, 3),
-          ...exercises.back.slice(0, 3),
-          ...exercises.legs.slice(0, 3),
-          ...exercises.shoulders.slice(0, 3),
-          ...exercises.arms.slice(0, 3)
-        ];
+        selectedExercises = {
+          day1: [...exercises.chest.slice(0, 4), ...exercises.arms.slice(5, 9)], // Chest & arms
+          day2: [...exercises.back.slice(0, 4), ...exercises.arms.slice(0, 3)],  // Back & arms
+          day3: [...exercises.legs.slice(0, 6)],                                  // Legs
+          day4: [...exercises.shoulders.slice(0, 4), ...exercises.core.slice(0, 3)], // Shoulders & Core
+          day5: [...exercises.arms.slice(0, 4), ...exercises.core.slice(0, 3)]    // Arms & Core
+        };
         break;
+  
       case 'ppl':
-        selectedExercises = [
-          ...exercises.chest.slice(0, 4),
-          ...exercises.back.slice(0, 4),
-          ...exercises.legs.slice(0, 4)
-        ];
+        selectedExercises = {
+          day1: [...exercises.chest.slice(0, 4), ...exercises.shoulders.slice(0, 3), ...exercises.arms.slice(0, 3)], // Push
+          day2: [...exercises.back.slice(0, 4), ...exercises.arms.slice(0, 3)],  // Pull
+          day3: [...exercises.legs.slice(0, 6)],                                  // Legs
+          day4: [...exercises.chest.slice(0, 4), ...exercises.shoulders.slice(0, 3), ...exercises.arms.slice(0, 3)], // Push
+          day5: [...exercises.back.slice(0, 4), ...exercises.arms.slice(0, 3)],  // Pull
+          day6: [...exercises.legs.slice(0, 6)],                                  // Legs
+        };
         break;
+  
       case 'upper-lower':
-        selectedExercises = [
-          ...exercises.chest.slice(0, 3),
-          ...exercises.back.slice(0, 3),
-          ...exercises.shoulders.slice(0, 3),
-          ...exercises.legs.slice(0, 4)
-        ];
+        selectedExercises = {
+          day1: [...exercises.chest.slice(0, 3), ...exercises.back.slice(0, 3), ...exercises.shoulders.slice(0, 3)], 
+          day2: [...exercises.legs.slice(0, 6)],
+          day3: [...exercises.chest.slice(0, 3), ...exercises.back.slice(0, 3), ...exercises.shoulders.slice(0, 3)], 
+          day4: [...exercises.legs.slice(0, 6)]
+        };
         break;
+  
       case 'fullbody':
-        selectedExercises = [
-          ...exercises.chest.slice(0, 2),
-          ...exercises.back.slice(0, 2),
-          ...exercises.legs.slice(0, 2),
-          ...exercises.shoulders.slice(0, 2),
-          ...exercises.arms.slice(0, 2)
-        ];
+        selectedExercises = {
+          day1: [...exercises.chest.slice(0, 2), ...exercises.back.slice(0, 2), ...exercises.legs.slice(0, 2), ...exercises.shoulders.slice(0, 2), ...exercises.arms.slice(0, 2)],
+          day2: [...exercises.chest.slice(0, 2), ...exercises.back.slice(0, 2), ...exercises.legs.slice(0, 2), ...exercises.shoulders.slice(0, 2), ...exercises.core.slice(0, 2)],
+          day3: [...exercises.chest.slice(0, 2), ...exercises.back.slice(0, 2), ...exercises.legs.slice(0, 2), ...exercises.shoulders.slice(0, 2), ...exercises.arms.slice(0, 2)]
+        };
         break;
+  
       case 'power':
-        selectedExercises = [
-          ...exercises.chest.slice(0, 3),
-          ...exercises.back.slice(0, 3),
-          ...exercises.legs.slice(0, 3),
-          ...exercises.shoulders.slice(0, 3)
-        ];
+        selectedExercises = {
+          day1: [...exercises.chest.slice(0, 3), ...exercises.arms.slice(0, 3)], 
+          day2: [...exercises.back.slice(0, 3), ...exercises.arms.slice(0, 3)],  
+          day3: [...exercises.legs.slice(0, 6)],                                  
+          day4: [...exercises.shoulders.slice(0, 3), ...exercises.core.slice(0, 3)], 
+          day5: [...exercises.arms.slice(0, 4), ...exercises.core.slice(0, 3)]   
+        };
         break;
+  
       case 'endurance':
-        selectedExercises = [
-          ...exercises.chest.slice(0, 2),
-          ...exercises.back.slice(0, 2),
-          ...exercises.legs.slice(0, 2),
-          ...exercises.core.slice(0, 2)
-        ];
+        selectedExercises = {
+          day1: [...exercises.chest.slice(0, 2), ...exercises.back.slice(0, 2), ...exercises.core.slice(0, 2)], 
+          day2: [...exercises.legs.slice(0, 4), ...exercises.core.slice(0, 2)],   
+          day3: [...exercises.shoulders.slice(0, 2), ...exercises.arms.slice(0, 2), ...exercises.core.slice(0, 2)], 
+          day4: [...exercises.chest.slice(0, 2), ...exercises.back.slice(0, 2), ...exercises.core.slice(0, 2)]
+        };
         break;
+  
       default:
-        selectedExercises = [];
+        selectedExercises = {};
     }
 
-    // Navigate to the plan page with selected exercises
+    console.log("Selected Exercises:", selectedExercises);
+
     navigate(`/plans/${plan}`, { state: { exercises: selectedExercises } });
   };
 
@@ -215,7 +217,7 @@ const Plans = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
               Choose Your 
-              <span className="bg-gradient-to-br from-green-600 to-emerald-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-br from-sky-600 to-blue-600 bg-clip-text text-transparent">
                 {" "}
                 Training Plan
               </span>
@@ -246,7 +248,7 @@ const Plans = () => {
               </div>
 
               <div className="relative p-6">
-                <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
                   {planDetails[plan].title}
                 </h3>
 
@@ -256,24 +258,24 @@ const Plans = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-emerald-500" />
+                    <Calendar className="w-5 h-5 text-blue-500" />
                     <span className="text-sm text-gray-600">{planDetails[plan].days}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Timer className="w-5 h-5 text-emerald-500" />
+                    <Timer className="w-5 h-5 text-blue-500" />
                     <span className="text-sm text-gray-600">{planDetails[plan].intensity}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-emerald-500" />
+                    <Users className="w-5 h-5 text-blue-500" />
                     <span className="text-sm text-gray-600">{planDetails[plan].experience}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Dumbbell className="w-5 h-5 text-emerald-500" />
+                    <Dumbbell className="w-5 h-5 text-blue-500" />
                     <span className="text-sm text-gray-600">Strength Focus</span>
                   </div>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </div>
             </motion.div>
           ))}

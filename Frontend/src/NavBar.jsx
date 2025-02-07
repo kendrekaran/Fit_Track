@@ -46,11 +46,11 @@ const NavBar = () => {
       >
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="p-2  bg-gradient-to-br from-emerald-600 to-emerald-400 rounded-xl shadow-lg"
+          className="p-2  bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl shadow-lg"
         >
           <Dumbbell className="w-6 h-6 text-white" />
         </motion.div>
-        <h1 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-400 bg-clip-text text-transparent">
+        <h1 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-sky-600 to-blue-400 bg-clip-text text-transparent">
           FitTrack
         </h1>
       </Link>
@@ -64,7 +64,7 @@ const NavBar = () => {
               to={link.path}
               className={({ isActive }) => 
                 `relative text-lg font-medium px-3 py-2 transition-colors
-                ${isActive ? 'text-emerald-600' : 'text-gray-600 hover:text-gray-900'}`
+                ${isActive ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'}`
               }
             >
               {({ isActive }) => (
@@ -72,7 +72,7 @@ const NavBar = () => {
                   {link.name}
                   {isActive && (
                     <motion.div
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-500"
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"
                       layoutId="underline"
                     />
                   )}
@@ -88,13 +88,13 @@ const NavBar = () => {
           className="ml-4 relative group"
         >
           <motion.img
-            className="h-12 w-12 rounded-full object-cover border-2 border-white shadow-lg group-hover:border-emerald-100 transition-colors"
+            className="h-12 w-12 rounded-full object-cover border-2 border-white shadow-lg group-hover:border-blue-100 transition-colors"
             src={profileImage}
             alt="Profile"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
-          <div className="absolute inset-0 rounded-full ring-0 group-hover:ring-2 ring-emerald-200/50 transition-all duration-300" />
+          <div className="absolute inset-0 rounded-full ring-0 group-hover:ring-2 ring-blue-200/50 transition-all duration-300" />
         </Link>
       </div>
 
@@ -127,7 +127,7 @@ const NavBar = () => {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) => 
                     `px-4 py-3 rounded-lg text-lg font-medium transition-colors
-                    ${isActive ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:bg-gray-50'}`
+                    ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50'}`
                   }
                 >
                   {link.name}

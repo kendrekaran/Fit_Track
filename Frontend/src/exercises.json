@@ -349,24 +349,9 @@
                   "description1": "Hold dumbbells with palms facing each other.",
                   "description2": "Curl weights to shoulder level, then lower."
                 },
+                
                 {
                   "id": "arms_03",
-                  "name": "Tricep Pushdown",
-                  "muscle": "Triceps",
-                  "gif_url": "https://i.pinimg.com/originals/e5/94/97/e5949758e3db91e1020cdecf938c36e3.gif",
-                  "description1": "Grip cable bar, elbows by sides.",
-                  "description2": "Push bar down until arms are straight, then return."
-                },
-                {
-                  "id": "arms_04",
-                  "name": "Skull Crusher",
-                  "muscle": "Triceps",
-                  "gif_url": "https://i.pinimg.com/originals/62/ff/4e/62ff4eb464ca363520a54544a4ce8e0a.gif",
-                  "description1": "Lie on bench with barbell, lower to forehead.",
-                  "description2": "Extend arms to return to start."
-                },
-                {
-                  "id": "arms_05",
                   "name": "Concentration Curl",
                   "muscle": "Biceps",
                   "gif_url": "https://i.pinimg.com/originals/60/8a/08/608a081f30579433ae81e34c6a1a9895.gif",
@@ -374,7 +359,15 @@
                   "description2": "Curl weight to shoulder, then lower."
                 },
                 {
-                  "id": "arms_06",
+                  "id": "arms_04",
+                  "name": "Preacher Curl",
+                  "muscle": "Biceps",
+                  "gif_url": "https://i.pinimg.com/originals/b6/ea/17/b6ea17377640b9bb77068888388b5d0a.gif",
+                  "description1": "Sit at preacher bench, hold barbell with underhand grip.",
+                  "description2": "Curl bar toward shoulders, then lower."
+                },
+                {
+                  "id": "arms_05",
                   "name": "Overhead Tricep Extension",
                   "muscle": "Triceps",
                   "gif_url": "https://i.pinimg.com/originals/2c/62/ba/2c62ba80d37c94d06ad6d60f1e5445df.gif",
@@ -382,12 +375,20 @@
                   "description2": "Lower behind head, then extend arms."
                 },
                 {
+                  "id": "arms_06",
+                  "name": "Tricep Pushdown",
+                  "muscle": "Triceps",
+                  "gif_url": "https://i.pinimg.com/originals/e5/94/97/e5949758e3db91e1020cdecf938c36e3.gif",
+                  "description1": "Grip cable bar, elbows by sides.",
+                  "description2": "Push bar down until arms are straight, then return."
+                },
+                {
                   "id": "arms_07",
-                  "name": "Preacher Curl",
-                  "muscle": "Biceps",
-                  "gif_url": "https://i.pinimg.com/originals/b6/ea/17/b6ea17377640b9bb77068888388b5d0a.gif",
-                  "description1": "Sit at preacher bench, hold barbell with underhand grip.",
-                  "description2": "Curl bar toward shoulders, then lower."
+                  "name": "Skull Crusher",
+                  "muscle": "Triceps",
+                  "gif_url": "https://i.pinimg.com/originals/62/ff/4e/62ff4eb464ca363520a54544a4ce8e0a.gif",
+                  "description1": "Lie on bench with barbell, lower to forehead.",
+                  "description2": "Extend arms to return to start."
                 },
                 {
                   "id": "arms_08",
@@ -399,19 +400,19 @@
                 },
                 {
                   "id": "arms_09",
-                  "name": "Reverse Curl",
-                  "muscle": "Forearms",
-                  "gif_url": "https://i.pinimg.com/originals/2f/42/31/2f4231b2e426ecfcd636e4fa370c1e40.gif",
-                  "description1": "Hold dumbell with overhand grip.",
-                  "description2": "Curl bar to shoulder level, then lower."
-                },
-                {
-                  "id": "arms_10",
                   "name": "Close Grip Bench Press",
                   "muscle": "Triceps",
                   "gif_url": "https://i.pinimg.com/originals/78/62/57/7862577ea75757f583c5bd6bd80178ec.gif",
                   "description1": "Lie on bench, hands close together on dumble.",
                   "description2": "Lower to chest, then press up."
+                },
+                {
+                  "id": "arms_10",
+                  "name": "Reverse Curl",
+                  "muscle": "Forearms",
+                  "gif_url": "https://i.pinimg.com/originals/2f/42/31/2f4231b2e426ecfcd636e4fa370c1e40.gif",
+                  "description1": "Hold dumbell with overhand grip.",
+                  "description2": "Curl bar to shoulder level, then lower."
                 }
       ],
 

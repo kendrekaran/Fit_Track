@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Settings, User, Camera, X, Check, Dumbbell, ChevronRight } from 'lucide-react';
 import NavBar from '../NavBar';
-import { Settings, User, Activity, Calendar, Award, LogOut, Camera, X, Check } from 'lucide-react';
+
 
 const avatarImages = [
   'https://i.pinimg.com/474x/9f/df/46/9fdf46c6e5b2465e340ede0da9ee431b.jpg',
@@ -74,18 +75,36 @@ const ProfilePictureModal = ({ isOpen, onClose, onSelect, currentImage }) => (
   </AnimatePresence>
 );
 
-const StatCard = ({ icon: Icon, title, value }) => (
+const TrainingSplitCard = ({ title, exercises, color }) => (
   <motion.div
-    className="bg-white p-4 rounded-xl shadow-sm flex items-center gap-4"
+    className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100"
     whileHover={{ y: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <div className="p-3 bg-gray-100 rounded-lg">
-      <Icon className="w-6 h-6 text-gray-700" />
+    <div className={`p-4 ${color} text-white`}>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Dumbbell className="w-5 h-5" />
+          <h3 className="font-semibold">{title}</h3>
+        </div>
+        <span className="text-sm opacity-75">{exercises.length} exercises</span>
+      </div>
     </div>
-    <div>
-      <p className="text-sm text-gray-600">{title}</p>
-      <p className="text-lg font-semibold">{value}</p>
+    <div className="p-4">
+      <ul className="space-y-2">
+        {exercises.slice(0, 3).map((exercise, index) => (
+          <li key={index} className="flex items-center gap-2 text-sm text-gray-600">
+            <div className="w-1 h-1 rounded-full bg-gray-400" />
+            {exercise}
+          </li>
+        ))}
+        {exercises.length > 3 && (
+          <li className="flex items-center justify-between text-sm text-gray-500 pt-2">
+            <span>+{exercises.length - 3} more exercises</span>
+            <ChevronRight className="w-4 h-4" />
+          </li>
+        )}
+      </ul>
     </div>
   </motion.div>
 );
@@ -94,17 +113,57 @@ const Profile = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [profilePicture, setProfilePicture] = useState(avatarImages[0]);
-  const [userStats] = useState({
-    workoutsCompleted: 48,
-    streakDays: 7,
-    achievements: 12,
-    joinedDate: '2024'
-  });
 
   const userName = localStorage.getItem('userName');
   const userEmail = localStorage.getItem('userEmail');
 
-  
+  // Sample training splits data
+  const trainingSplits = [
+    {
+      title: "Push Day",
+      exercises: [
+        "Bench Press",
+        "Overhead Press",
+        "Tricep Extensions",
+        "Lateral Raises",
+        "Chest Flyes"
+      ],
+      color: "bg-blue-600"
+    },
+    {
+      title: "Pull Day",
+      exercises: [
+        "Deadlifts",
+        "Barbell Rows",
+        "Pull-ups",
+        "Bicep Curls",
+        "Face Pulls"
+      ],
+      color: "bg-blue-600"
+    },
+    {
+      title: "Leg Day",
+      exercises: [
+        "Squats",
+        "Romanian Deadlifts",
+        "Leg Press",
+        "Calf Raises",
+        "Leg Extensions"
+      ],
+      color: "bg-purple-600"
+    },
+    {
+      title: "Core & Cardio",
+      exercises: [
+        "Planks",
+        "Russian Twists",
+        "Mountain Climbers",
+        "HIIT Intervals",
+        "Jump Rope"
+      ],
+      color: "bg-orange-600"
+    }
+  ];
 
   const handleLogOut = () => {
     localStorage.removeItem('token');
@@ -116,18 +175,14 @@ const Profile = () => {
   const handlePictureSelect = (newPicture) => {
     setProfilePicture(newPicture);
     localStorage.setItem('profilePicture', newPicture);
-    
-    // Dispatch custom event to update Navbar immediately
     window.dispatchEvent(new CustomEvent('profilePictureUpdate', {
       detail: { picture: newPicture }
     }));
-    
     setIsModalOpen(false);
   };
 
   useEffect(() => {
     document.title = `${userName}'s Profile`;
-    // Load saved profile picture from localStorage
     const savedPicture = localStorage.getItem('profilePicture');
     if (savedPicture) {
       setProfilePicture(savedPicture);
@@ -149,13 +204,13 @@ const Profile = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Left Column - Profile Info */}
-          <div className="lg:col-span-1">
-            <motion.div
-              className="bg-white rounded-2xl shadow-md p-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+          <motion.div
+            className="lg:col-span-1"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="bg-white rounded-2xl shadow-md p-8">
               <div className="relative mx-auto w-40 h-40">
                 <motion.img
                   className="w-40 h-40 rounded-full object-cover shadow-lg"
@@ -182,75 +237,46 @@ const Profile = () => {
                     whileHover={{ scale: 1.05 }}
                     onClick={handleLogOut}
                   >
-                    <LogOut className="w-4 h-4" />
-                    Logout
+                    <span>Logout</span>
                   </motion.button>
                   <motion.button
                     className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
                     whileHover={{ scale: 1.05 }}
                   >
                     <Settings className="w-4 h-4" />
-                    Settings
+                    <span>Settings</span>
                   </motion.button>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
 
-          {/* Right Column - Stats & Activity */}
+          {/* Right Column - Training Splits */}
           <div className="lg:col-span-2">
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="mb-6"
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Your Training Splits</h2>
+              <p className="text-gray-600">Customize your workout routine with these training splits</p>
+            </motion.div>
+            
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <StatCard 
-                icon={Activity} 
-                title="Workouts Completed" 
-                value={userStats.workoutsCompleted}
-              />
-              <StatCard 
-                icon={Calendar} 
-                title="Current Streak" 
-                value={`${userStats.streakDays} days`}
-              />
-              <StatCard 
-                icon={Award} 
-                title="Achievements" 
-                value={userStats.achievements}
-              />
-              <StatCard 
-                icon={User} 
-                title="Member Since" 
-                value={userStats.joinedDate}
-              />
-            </motion.div>
-
-            <motion.div
-              className="bg-white rounded-2xl shadow-md p-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-              <div className="space-y-4">
-                {[1, 2, 3].map((_, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
-                    whileHover={{ x: 10 }}
-                  >
-                    <div className="p-2 bg-gray-100 rounded-lg">
-                      <Activity className="w-5 h-5 text-gray-700" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Completed Chest Workout</p>
-                      <p className="text-sm text-gray-500">2 days ago</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              {trainingSplits.map((split, index) => (
+                <TrainingSplitCard
+                  key={index}
+                  title={split.title}
+                  exercises={split.exercises}
+                  color={split.color}
+                />
+              ))}
             </motion.div>
           </div>
         </div>

@@ -16,6 +16,7 @@ import Power from './Plans/Power'
 import Endurance from './Plans/Endurance'
 import DietPlans from './DietPlans'
 import { LoadingProvider } from './LoadingContext'
+import WorkoutPlan from './WorkoutPlan'
 
 const App = () => {
 
@@ -32,12 +33,7 @@ const App = () => {
         <Route path="/diet" element={<DietPlans/>} ></Route>
         <Route path="/muscle/:muscle" element={<MuscleExercises/>} ></Route>
         <Route path="/plans" element={<Plans />} />
-        <Route path="/plans/classic" element={<Classic />} />
-        <Route path="/plans/ppl" element={<PPL />} />
-        <Route path="/plans/upper-lower" element={<UL />} />
-        <Route path="/plans/fullbody" element={<Fullbody />} />
-        <Route path="/plans/power" element={<Power />} />
-        <Route path="/plans/endurance" element={<Endurance />} />
+        <Route path="/plans/:plan" element={<WorkoutPlan />} />
       </Routes>
     </LoadingProvider>
     </div>
