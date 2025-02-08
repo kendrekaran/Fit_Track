@@ -5,7 +5,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import ReactMarkdown from 'react-markdown';
 import NavBar from './NavBar';
 
-// Initialize Google AI
+
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
@@ -115,9 +115,9 @@ const FitnessApp = () => {
 
   useEffect(() => {
     if (results?.dietPlan) {
-      setAnimatedDietPlan(''); // Reset the animated text
+      setAnimatedDietPlan(''); 
       let i = 0;
-      const text = String(results.dietPlan); // Explicit string conversion
+      const text = String(results.dietPlan); 
       
       const interval = setInterval(() => {
         if (i < text.length) {

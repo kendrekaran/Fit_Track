@@ -51,7 +51,7 @@ const NavBar = () => {
           <Dumbbell className="w-6 h-6 text-white" />
         </motion.div>
         <h1 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-sky-600 to-blue-400 bg-clip-text text-transparent">
-          FitTrack
+          Eleweight
         </h1>
       </Link>
       
