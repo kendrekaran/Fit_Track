@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 import FeatureCards from './FeaturedCards';
 import { motion } from "framer-motion";
-import { Dumbbell, List, ClipboardCheck, Utensils, Bot, MoveRight } from "lucide-react";
+import { Dumbbell, List, Utensils, Bot, MoveRight } from "lucide-react";
 
 
 const Home = () => {
@@ -139,7 +139,7 @@ const Home = () => {
                 <div className="flex flex-col sm:flex-row gap-4 px-8 sm:px-0">
                   <Link
                     to="/muscle"
-                    className="group inline-flex items-center justify-center gap-2 px-2 py-2 sm:px-6 sm:py-3 bg-gradient-to-br from-gray-900 to-black text-white rounded-2xl font-semibold hover:shadow-xl transform transition-all duration-300 hover:scale-[1.02] relative overflow-hidden"
+                    className="group inline-flex items-center justify-center gap-2 px-2 py-2 sm:px-6 sm:py-3 bg-gradient-to-br from-blue-600 to-sky-600 text-white rounded-2xl font-semibold hover:shadow-xl transform transition-all duration-300 hover:scale-[1.02] relative overflow-hidden"
                   >
                     <span className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     Start Training
